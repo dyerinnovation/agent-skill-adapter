@@ -84,14 +84,10 @@ class TestInferenceIntegration:
     async def test_full_flow_skill_to_evaluation(self, sample_skill_content, mock_tgi_response):
         """Test full flow: skill_loader -> evaluator -> inference."""
         # Parse skill file
-        with patch("builtins.open", create=True) as mock_open:
-            mock_open.return_value.__enter__ = Mock(return_value=Mock(read=Mock(return_value=sample_skill_content)))
-            mock_open.return_value.__exit__ = Mock(return_value=False)
-
-            with patch("os.path.exists", return_value=True):
-                from src.services.skill_loader import parse_skill
-                from pathlib import Path
-                skill = parse_skill(Path("/fake/path/SKILL.md"))
+        from src.services.skill_loader import parse_skill
+        from pathlib import Path
+        with patch.object(Path, "read_text", return_value=sample_skill_content):
+            skill = parse_skill(Path("/fake/path/SKILL.md"))
 
         # Mock inference client
         mock_httpx_client = AsyncMock()
