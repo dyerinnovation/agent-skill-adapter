@@ -81,22 +81,22 @@ training-job:
       cpu: 2000m
       memory: 8Gi
 
-# TGI model serving configuration
+# Model inference (vLLM via NVIDIA NGC image, OpenAI-compatible API)
 tgi:
   image:
-    repository: ghcr.io/huggingface/text-generation-inference
-    tag: "2.4.0"
+    repository: nvcr.io/nvidia/vllm
+    tag: "26.01-py3"
   model:
     id: Qwen/Qwen3-8B
-    quantize: awq
+    maxModelLen: 8192
   resources:
     limits:
       cpu: 4000m
-      memory: 32Gi
+      memory: 64Gi
       nvidia.com/gpu: 1
     requests:
       cpu: 2000m
-      memory: 16Gi
+      memory: 32Gi
   persistence:
     hostPath: /home/jondyer3/.cache/huggingface
 

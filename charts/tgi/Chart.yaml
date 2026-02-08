@@ -1,6 +1,6 @@
 apiVersion: v2
 name: tgi
-description: Text Generation Inference (TGI) for model serving
+description: Model inference via vLLM (OpenAI-compatible API)
 type: application
-version: 0.1.0
-appVersion: "2.4.0"
+version: 0.2.0
+appVersion: "26.01"

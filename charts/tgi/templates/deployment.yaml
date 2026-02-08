@@ -15,38 +15,41 @@ spec:
         {{- include "tgi.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: tgi
+      - name: vllm
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        args:
+        - --model
+        - {{ .Values.model.id | quote }}
+        - --max-model-len
+        - {{ .Values.model.maxModelLen | quote }}
+        - --port
+        - "8080"
         ports:
         - name: http
           containerPort: 8080
           protocol: TCP
         env:
-        - name: MODEL_ID
-          value: {{ .Values.model.id | quote }}
-        - name: QUANTIZE
-          value: {{ .Values.model.quantize | quote }}
-        - name: MAX_INPUT_LENGTH
-          value: {{ .Values.model.maxInputLength | quote }}
-        - name: MAX_TOTAL_TOKENS
-          value: {{ .Values.model.maxTotalTokens | quote }}
+        - name: HF_HOME
+          value: /data
+        - name: HUGGING_FACE_HUB_TOKEN
+          value: ""
         livenessProbe:
           httpGet:
             path: /health
             port: http
-          initialDelaySeconds: 60
+          initialDelaySeconds: 120
           periodSeconds: 10
           timeoutSeconds: 5
-          failureThreshold: 3
+          failureThreshold: 6
         readinessProbe:
           httpGet:
             path: /health
             port: http
-          initialDelaySeconds: 30
+          initialDelaySeconds: 60
           periodSeconds: 5
           timeoutSeconds: 3
-          failureThreshold: 3
+          failureThreshold: 6
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
         volumeMounts:
