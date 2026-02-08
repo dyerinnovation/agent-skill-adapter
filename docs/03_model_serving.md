@@ -1,6 +1,6 @@
 # Model Serving Guide
 
-This guide covers deploying Text Generation Inference (TGI) to serve the Qwen3-8B model with an OpenAI-compatible API.
+This guide covers deploying Text Generation Inference (TGI) to serve the Qwen3-30B-A3B model with an OpenAI-compatible API.
 
 ## Overview
 
@@ -23,9 +23,9 @@ The Agent Skill Adapter uses the InfraCloud Helm chart to deploy TGI on Kubernet
 helm repo add infracloud https://infracloud-io.github.io/charts
 helm repo update
 
-# Install TGI configured for Qwen3-8B
+# Install TGI configured for Qwen3-30B-A3B
 helm install tgi infracloud/text-generation-inference \
-  --set model.name="Qwen/Qwen3-8B" \
+  --set model.name="Qwen/Qwen3-30B-A3B" \
   --set model.cache="/cache/huggingface" \
   --set resources.limits.nvidia\.com/gpu=1 \
   --namespace skill-adapter \
@@ -38,7 +38,7 @@ Key Helm values for TGI deployment:
 
 | Parameter | Description | Example |
 |-----------|-------------|---------|
-| `model.name` | HuggingFace model ID | `Qwen/Qwen3-8B` |
+| `model.name` | HuggingFace model ID | `Qwen/Qwen3-30B-A3B` |
 | `model.cache` | HuggingFace cache directory | `/cache/huggingface` |
 | `resources.limits.nvidia.com/gpu` | Number of GPUs | `1` |
 | `service.type` | Kubernetes service type | `ClusterIP` or `LoadBalancer` |
@@ -74,7 +74,7 @@ Example request:
 curl -X POST http://tgi-service/v1/completions \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "Qwen/Qwen3-8B",
+    "model": "Qwen/Qwen3-30B-A3B",
     "prompt": "What is the meaning of life?",
     "max_tokens": 100,
     "temperature": 0.7
@@ -93,7 +93,7 @@ Example request:
 curl -X POST http://tgi-service/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "Qwen/Qwen3-8B",
+    "model": "Qwen/Qwen3-30B-A3B",
     "messages": [
       {"role": "user", "content": "Explain quantum computing"}
     ],
@@ -138,7 +138,7 @@ GET /metrics
 curl -X POST http://tgi-service/v1/completions \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "Qwen/Qwen3-8B",
+    "model": "Qwen/Qwen3-30B-A3B",
     "prompt": "Hello, world!",
     "max_tokens": 10
   }'
@@ -151,7 +151,7 @@ Expected response:
   "id": "cmpl-...",
   "object": "text_completion",
   "created": 1234567890,
-  "model": "Qwen/Qwen3-8B",
+  "model": "Qwen/Qwen3-30B-A3B",
   "choices": [
     {
       "text": " How can I help you today?",
@@ -183,7 +183,7 @@ Since TGI is in maintenance mode, consider using **vLLM** for new deployments:
 ```bash
 # vLLM Helm install (example)
 helm install vllm vllm/vllm \
-  --set model="Qwen/Qwen3-8B" \
+  --set model="Qwen/Qwen3-30B-A3B" \
   --set gpu.count=1 \
   --namespace skill-adapter
 ```

@@ -353,7 +353,7 @@ Configure via `.env` (Docker Compose) or Helm values (Kubernetes):
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `SKILL_ADAPTER_MODEL` | Base model ID | `Qwen/Qwen3-8B` |
+| `SKILL_ADAPTER_MODEL` | Base model ID | `Qwen/Qwen3-30B-A3B` |
 | `SKILL_ADAPTER_ADAPTER` | Adapter type | `lora` |
 | `SKILL_ADAPTER_QUANT_BITS` | Quantization bits | `4` |
 | `SKILL_ADAPTER_INFERENCE_URL` | TGI service URL | `http://tgi-service/v1` |

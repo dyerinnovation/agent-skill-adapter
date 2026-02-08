@@ -24,7 +24,7 @@ Create or update `.env` with training configuration:
 
 ```bash
 # Model configuration
-SKILL_ADAPTER_MODEL=Qwen/Qwen3-8B
+SKILL_ADAPTER_MODEL=Qwen/Qwen3-30B-A3B
 SKILL_ADAPTER_ADAPTER=lora  # or qlora
 SKILL_ADAPTER_QUANT_BITS=4
 
@@ -184,7 +184,7 @@ Example:
 from peft import PeftModel
 from transformers import AutoModelForCausalLM
 
-base_model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-8B")
+base_model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-30B-A3B")
 model = PeftModel.from_pretrained(base_model, "./checkpoints/train-abc123/final")
 ```
 

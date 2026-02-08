@@ -1,6 +1,6 @@
 # Model Download Guide
 
-This guide covers downloading the Qwen3-8B model from HuggingFace Hub.
+This guide covers downloading the Qwen3-30B-A3B model from HuggingFace Hub.
 
 ## Prerequisites
 
@@ -8,12 +8,12 @@ This guide covers downloading the Qwen3-8B model from HuggingFace Hub.
 - ~14GB of available disk space
 - HuggingFace account (optional, for gated models)
 
-## Download Qwen3-8B
+## Download Qwen3-30B-A3B
 
 Use the `huggingface-cli` tool via `uv run` to download the model:
 
 ```bash
-uv run huggingface-cli download Qwen/Qwen3-8B
+uv run huggingface-cli download Qwen/Qwen3-30B-A3B
 ```
 
 This command will:
@@ -23,14 +23,14 @@ This command will:
 
 ## Download Size
 
-The Qwen3-8B model requires approximately **14GB** of disk space.
+The Qwen3-30B-A3B model requires approximately **14GB** of disk space.
 
 ## Cache Location
 
 Models are cached at:
 
 ```bash
-~/.cache/huggingface/hub/models--Qwen--Qwen3-8B
+~/.cache/huggingface/hub/models--Qwen--Qwen3-30B-A3B
 ```
 
 This cache is shared across all applications using HuggingFace Transformers, so the model only needs to be downloaded once.
@@ -53,7 +53,7 @@ Expected output:
 
 ```
 REPO ID                 REPO TYPE SIZE ON DISK NB FILES REFS
-Qwen/Qwen3-8B          model          14.0G        15 main
+Qwen/Qwen3-30B-A3B          model          18.0G        15 main
 ```
 
 ## Authentication (Optional)
