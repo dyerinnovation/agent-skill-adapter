@@ -1,0 +1,19 @@
+apiVersion: v2
+name: skill-adapter
+description: Umbrella chart for the Skill Adapter pipeline
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+dependencies:
+  - name: api
+    version: "0.1.0"
+    repository: "file://../api"
+  - name: frontend
+    version: "0.1.0"
+    repository: "file://../frontend"
+  - name: redis
+    version: "0.1.0"
+    repository: "file://../redis"
+  - name: training-job
+    version: "0.1.0"
+    repository: "file://../training-job"

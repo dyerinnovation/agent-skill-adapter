@@ -1,0 +1,5 @@
+replicaCount: 1
+image:
+  repository: skill-adapter-training-job
+  tag: latest
+  pullPolicy: IfNotPresent

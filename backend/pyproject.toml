@@ -1,0 +1,41 @@
+[project]
+name = "skill-adapter-backend"
+version = "0.1.0"
+description = "RLVF training pipeline for Agent Skills"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "redis>=5.0",
+    "pydantic-settings>=2.6",
+    "pyyaml>=6.0",
+    "transformers>=4.45",
+    "trl>=0.12",
+    "peft>=0.13",
+    "bitsandbytes>=0.44",
+    "datasets>=3.0",
+    "torch>=2.4",
+    "accelerate>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "httpx>=0.27",
+    "ruff>=0.8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

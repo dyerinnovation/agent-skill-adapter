@@ -1,0 +1,5 @@
+replicaCount: 1
+image:
+  repository: skill-adapter-frontend
+  tag: latest
+  pullPolicy: IfNotPresent

@@ -1,0 +1,48 @@
+services:
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - SKILL_ADAPTER_MODEL=${SKILL_ADAPTER_MODEL:-Qwen/Qwen3-7B}
+      - SKILL_ADAPTER_ADAPTER=${SKILL_ADAPTER_ADAPTER:-lora}
+      - SKILL_ADAPTER_LORA_RANK=${SKILL_ADAPTER_LORA_RANK:-16}
+      - SKILL_ADAPTER_LORA_ALPHA=${SKILL_ADAPTER_LORA_ALPHA:-32}
+      - SKILL_ADAPTER_QUANT_BITS=${SKILL_ADAPTER_QUANT_BITS:-4}
+      - SKILL_ADAPTER_BATCH_SIZE=${SKILL_ADAPTER_BATCH_SIZE:-4}
+      - SKILL_ADAPTER_MAX_SEQ_LEN=${SKILL_ADAPTER_MAX_SEQ_LEN:-4096}
+      - SKILL_ADAPTER_GRADIENT_CHECKPOINTING=${SKILL_ADAPTER_GRADIENT_CHECKPOINTING:-true}
+      - SKILL_ADAPTER_API_HOST=0.0.0.0
+      - SKILL_ADAPTER_API_PORT=8000
+      - SKILL_ADAPTER_REDIS_URL=redis://redis:6379
+      - SKILL_ADAPTER_SKILLS_DIR=/app/skills
+    volumes:
+      - model-cache:/root/.cache/huggingface
+      - ./backend/skills:/app/skills
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  model-cache:
+  redis-data:
