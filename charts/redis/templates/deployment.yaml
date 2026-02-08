@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include redis.fullname . }}
+  name: {{ include "redis.fullname" . }}
   labels:
-    {{- include redis.labels . | nindent 4 }}
+    {{- include "redis.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include redis.selectorLabels . | nindent 6 }}
+      {{- include "redis.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include redis.selectorLabels . | nindent 8 }}
+        {{- include "redis.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: redis
@@ -30,4 +30,4 @@ spec:
       volumes:
       - name: redis-data
         persistentVolumeClaim:
-          claimName: {{ include redis.fullname . }}
+          claimName: {{ include "redis.fullname" . }}

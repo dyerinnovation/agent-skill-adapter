@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include frontend.fullname . }}
+  name: {{ include "frontend.fullname" . }}
   labels:
-    {{- include frontend.labels . | nindent 4 }}
+    {{- include "frontend.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include frontend.selectorLabels . | nindent 6 }}
+      {{- include "frontend.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include frontend.selectorLabels . | nindent 8 }}
+        {{- include "frontend.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: frontend
@@ -24,6 +24,6 @@ spec:
           protocol: TCP
         envFrom:
         - configMapRef:
-            name: {{ include frontend.fullname . }}
+            name: {{ include "frontend.fullname" . }}
         resources:
           {{- toYaml .Values.resources | nindent 10 }}

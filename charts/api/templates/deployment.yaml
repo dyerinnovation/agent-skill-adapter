@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include api.fullname . }}
+  name: {{ include "api.fullname" . }}
   labels:
-    {{- include api.labels . | nindent 4 }}
+    {{- include "api.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include api.selectorLabels . | nindent 6 }}
+      {{- include "api.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include api.selectorLabels . | nindent 8 }}
+        {{- include "api.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: api
@@ -24,7 +24,7 @@ spec:
           protocol: TCP
         envFrom:
         - configMapRef:
-            name: {{ include api.fullname . }}
+            name: {{ include "api.fullname" . }}
         livenessProbe:
           httpGet:
             path: /health
