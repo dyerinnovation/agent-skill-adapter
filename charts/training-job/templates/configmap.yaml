@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include training-job.fullname . }}
+  labels:
+    {{- include training-job.labels . | nindent 4 }}
+data:
+  TRAINING_BATCH_SIZE: {{ .Values.config.batchSize | quote }}
+  TRAINING_EPOCHS: {{ .Values.config.epochs | quote }}
+  TRAINING_LEARNING_RATE: {{ .Values.config.learningRate | quote }}
+  TRAINING_MODEL_NAME: {{ .Values.config.modelName | quote }}
+  TRAINING_OUTPUT_DIR: {{ .Values.config.outputDir | quote }}
+  TRAINING_CACHE_DIR: {{ .Values.config.cacheDir | quote }}

@@ -1,5 +1,21 @@
 replicaCount: 1
+
 image:
-  repository: skill-adapter-redis
-  tag: latest
+  repository: redis
+  tag: 7-alpine
   pullPolicy: IfNotPresent
+
+persistence:
+  size: 10Gi
+  storageClass: 
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+nameOverride: 
+fullnameOverride: 

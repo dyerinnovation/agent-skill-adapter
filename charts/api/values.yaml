@@ -1,5 +1,25 @@
 replicaCount: 1
+
 image:
   repository: skill-adapter-api
   tag: latest
   pullPolicy: IfNotPresent
+
+config:
+  logLevel: INFO
+  redisHost: redis
+  redisPort: 6379
+  modelCacheDir: /models
+  maxWorkers: 4
+  enableMetrics: true
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 4Gi
+  requests:
+    cpu: 1000m
+    memory: 2Gi
+
+nameOverride: 
+fullnameOverride: 

@@ -1,6 +1,82 @@
+# API service configuration
 api:
   replicaCount: 1
+  image:
+    repository: skill-adapter-api
+    tag: latest
+    pullPolicy: IfNotPresent
+  config:
+    logLevel: INFO
+    redisHost: redis
+    redisPort: 6379
+    modelCacheDir: /models
+    maxWorkers: 4
+    enableMetrics: true
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 4Gi
+    requests:
+      cpu: 1000m
+      memory: 2Gi
+
+# Frontend service configuration
 frontend:
   replicaCount: 1
+  image:
+    repository: skill-adapter-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+  config:
+    apiUrl: http://api:8000
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+# Redis configuration
 redis:
   replicaCount: 1
+  image:
+    repository: redis
+    tag: 7-alpine
+    pullPolicy: IfNotPresent
+  persistence:
+    size: 10Gi
+    storageClass: 
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+# Training job configuration
+training-job:
+  image:
+    repository: skill-adapter-training-job
+    tag: latest
+    pullPolicy: IfNotPresent
+  config:
+    batchSize: 32
+    epochs: 10
+    learningRate: 0.001
+    modelName: default-model
+    outputDir: /models/output
+    cacheDir: /models/cache
+  gpu:
+    count: 1
+  persistence:
+    size: 50Gi
+    storageClass: 
+  resources:
+    limits:
+      cpu: 4000m
+      memory: 16Gi
+    requests:
+      cpu: 2000m
+      memory: 8Gi

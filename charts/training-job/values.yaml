@@ -1,5 +1,32 @@
 replicaCount: 1
+
 image:
   repository: skill-adapter-training-job
   tag: latest
   pullPolicy: IfNotPresent
+
+config:
+  batchSize: 32
+  epochs: 10
+  learningRate: 0.001
+  modelName: default-model
+  outputDir: /models/output
+  cacheDir: /models/cache
+
+gpu:
+  count: 1
+
+persistence:
+  size: 50Gi
+  storageClass: 
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 16Gi
+  requests:
+    cpu: 2000m
+    memory: 8Gi
+
+nameOverride: 
+fullnameOverride: 
