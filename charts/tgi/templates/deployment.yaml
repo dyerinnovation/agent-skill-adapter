@@ -18,6 +18,7 @@ spec:
       - name: vllm
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["python3", "-m", "vllm.entrypoints.openai.api_server"]
         args:
         - --model
         - {{ .Values.model.id | quote }}
@@ -55,8 +56,14 @@ spec:
         volumeMounts:
         - name: hf-cache
           mountPath: /data
+        - name: shm
+          mountPath: /dev/shm
       volumes:
       - name: hf-cache
         hostPath:
           path: {{ .Values.persistence.hostPath }}
           type: DirectoryOrCreate
+      - name: shm
+        emptyDir:
+          medium: Memory
+          sizeLimit: 16Gi

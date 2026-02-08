@@ -320,33 +320,31 @@ git config user.email "jon@dyerinnovation.com"
 
 The project uses **Text Generation Inference (TGI)** to serve models via OpenAI-compatible API.
 
-**Note**: TGI is in maintenance mode since December 2025. For new deployments, consider **vLLM** as an alternative.
+**Note**: The inference chart (`charts/tgi/`) now uses **vLLM** via the NVIDIA NGC image (`nvcr.io/nvidia/vllm:26.01-py3`), which is ARM64-native for DGX Spark. The original TGI Docker image is x86-only and doesn't work on ARM64.
 
-### TGI Deployment
+### vLLM Deployment
 
-Deploy TGI via Helm:
+Deploy vLLM via Helm:
 
 ```bash
-helm repo add infracloud https://infracloud-io.github.io/charts
-helm install tgi infracloud/text-generation-inference \
-  --set model.name="Qwen/Qwen3-8B" \
-  --set resources.limits.nvidia\.com/gpu=1 \
-  --namespace skill-adapter
+helm install tgi charts/tgi/
 ```
 
-### API Endpoints
+Or via the umbrella chart which includes all services.
+
+### API Endpoints (OpenAI-compatible)
 
 - **Completions**: `POST /v1/completions`
 - **Chat Completions**: `POST /v1/chat/completions`
+- **Models**: `GET /v1/models`
 - **Health**: `GET /health`
-- **Metrics**: `GET /metrics`
 
 ### Configuration
 
-Set `SKILL_ADAPTER_INFERENCE_URL` to point to the TGI service:
+Set `SKILL_ADAPTER_INFERENCE_URL` to point to the vLLM service:
 
 ```bash
-export SKILL_ADAPTER_INFERENCE_URL="http://tgi-service/v1"
+export SKILL_ADAPTER_INFERENCE_URL="http://tgi:8080/v1"
 ```
 
 ## Git Workflow
