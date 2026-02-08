@@ -26,9 +26,6 @@ spec:
         - {{ .Values.model.maxModelLen | quote }}
         - --port
         - "8080"
-        - --enable-reasoning
-        - --reasoning-parser
-        - deepseek_r1
         ports:
         - name: http
           containerPort: 8080
