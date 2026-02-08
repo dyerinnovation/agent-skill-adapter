@@ -7,7 +7,7 @@ image:
 
 model:
   id: Qwen/Qwen3-30B-A3B
-  maxModelLen: 131072
+  maxModelLen: 40960
 
 service:
   type: ClusterIP
