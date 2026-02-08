@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    model: str = "Qwen/Qwen3-7B"
+    model: str = "Qwen/Qwen3-8B"
     adapter: str = "lora"
     lora_rank: int = 16
     lora_alpha: int = 32
@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379"
     judge_model: str = ""
     skills_dir: str = "./skills"
+    inference_url: str = "http://localhost:8080"
 
     model_config = {"env_prefix": "SKILL_ADAPTER_"}
 

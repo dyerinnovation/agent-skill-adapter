@@ -17,3 +17,6 @@ dependencies:
   - name: training-job
     version: "0.1.0"
     repository: "file://../training-job"
+  - name: tgi
+    version: "0.1.0"
+    repository: "file://../tgi"

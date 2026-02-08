@@ -109,7 +109,7 @@ async def test_start_training(client):
             "/api/training/start",
             json={
                 "skill_id": "skill1",
-                "model": "Qwen/Qwen3-7B",
+                "model": "Qwen/Qwen3-8B",
                 "adapter": "lora",
             },
         )

@@ -7,6 +7,7 @@ from src.services.skill_loader import load_skills
 from src.services.evaluator import evaluate_output
 from src.services.trainer import SkillTrainer
 from src.services.data_generator import generate_training_data
+from src.services.inference import InferenceClient
 
 router = APIRouter()
 
@@ -37,21 +38,41 @@ async def run_evaluation(request: EvalRequest):
     
     # Initialize model if adapter path provided
     all_scores: list[EvalScore] = []
-    
+
     if request.model_path:
         trainer = SkillTrainer()
         trainer.load_adapter(request.model_path)
-        
+
         # Generate responses and evaluate
         for prompt in prompts:
             response = trainer.generate(prompt)
             scores, _ = evaluate_output(response, skill.rubrics)
             all_scores.extend(scores)
     else:
-        # No model - just evaluate empty output as baseline
-        for _ in prompts:
-            scores, _ = evaluate_output("", skill.rubrics)
-            all_scores.extend(scores)
+        # No model path - check if we can use inference endpoint
+        use_inference = (
+            settings.inference_url
+            and settings.inference_url != "http://localhost:8080"
+            and not settings.inference_url.startswith("http://localhost")
+        )
+
+        if use_inference:
+            # Use InferenceClient to generate responses
+            async with InferenceClient() as client:
+                for prompt in prompts:
+                    try:
+                        response = await client.complete(prompt)
+                        scores, _ = evaluate_output(response, skill.rubrics)
+                        all_scores.extend(scores)
+                    except Exception as e:
+                        # Fall back to empty output on error
+                        scores, _ = evaluate_output("", skill.rubrics)
+                        all_scores.extend(scores)
+        else:
+            # No model and no configured inference - evaluate empty output as baseline
+            for _ in prompts:
+                scores, _ = evaluate_output("", skill.rubrics)
+                all_scores.extend(scores)
     
     # Compute aggregate score
     if all_scores:

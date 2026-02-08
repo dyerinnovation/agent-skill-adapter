@@ -21,7 +21,7 @@ class SkillInfo(BaseModel):
 
 class TrainingRequest(BaseModel):
     skill_id: str
-    model: str = "Qwen/Qwen3-7B"
+    model: str = "Qwen/Qwen3-8B"
     adapter: str = "lora"
     lora_rank: int = 16
     lora_alpha: int = 32
