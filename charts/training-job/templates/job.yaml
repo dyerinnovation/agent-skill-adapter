@@ -1,14 +1,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include training-job.fullname . }}
+  name: {{ include "training-job.fullname" . }}
   labels:
-    {{- include training-job.labels . | nindent 4 }}
+    {{- include "training-job.labels" . | nindent 4 }}
 spec:
   template:
     metadata:
       labels:
-        {{- include training-job.selectorLabels . | nindent 8 }}
+        {{- include "training-job.selectorLabels" . | nindent 8 }}
     spec:
       restartPolicy: OnFailure
       containers:
@@ -17,7 +17,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         envFrom:
         - configMapRef:
-            name: {{ include training-job.fullname . }}
+            name: {{ include "training-job.fullname" . }}
         volumeMounts:
         - name: model-cache
           mountPath: {{ .Values.config.cacheDir }}
@@ -33,4 +33,4 @@ spec:
       volumes:
       - name: model-cache
         persistentVolumeClaim:
-          claimName: {{ include training-job.fullname . }}-cache
+          claimName: {{ include "training-job.fullname" . }}-cache
