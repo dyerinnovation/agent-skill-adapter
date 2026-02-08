@@ -87,7 +87,7 @@ tgi:
     repository: nvcr.io/nvidia/vllm
     tag: "26.01-py3"
   model:
-    id: Qwen/Qwen3-8B
+    id: Qwen/Qwen3-30B-A3B
     maxModelLen: 8192
   resources:
     limits:

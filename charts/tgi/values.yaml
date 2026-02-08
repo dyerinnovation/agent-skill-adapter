@@ -6,7 +6,7 @@ image:
   pullPolicy: IfNotPresent
 
 model:
-  id: Qwen/Qwen3-8B
+  id: Qwen/Qwen3-30B-A3B
   maxModelLen: 8192
 
 service:

@@ -212,7 +212,7 @@ Copy `.env.example` to `.env` and configure:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `SKILL_ADAPTER_MODEL` | `Qwen/Qwen3-8B` | HuggingFace model ID for base model |
+| `SKILL_ADAPTER_MODEL` | `Qwen/Qwen3-30B-A3B` | HuggingFace model ID for base model |
 | `SKILL_ADAPTER_ADAPTER` | `lora` | Adapter type: `lora` or `qlora` |
 | `SKILL_ADAPTER_QUANT_BITS` | `4` | Quantization bits (4 or 8) for QLoRA |
 | `SKILL_ADAPTER_LEARNING_RATE` | `2e-4` | Learning rate for training |
@@ -366,7 +366,7 @@ export SKILL_ADAPTER_INFERENCE_URL="http://tgi:8080/v1"
 Comprehensive guides are available in `docs/`:
 
 1. [DGX Spark Setup](./docs/01_dgx_spark_setup.md) — SSH, tools, PATH, GPU verification
-2. [Model Download](./docs/02_model_download.md) — Download Qwen3-8B via huggingface-cli
+2. [Model Download](./docs/02_model_download.md) — Download Qwen3-30B-A3B via huggingface-cli
 3. [Model Serving](./docs/03_model_serving.md) — Deploy TGI with Helm, API endpoints
 4. [Training Guide](./docs/04_training_guide.md) — LoRA/QLoRA training, monitoring, checkpoints
 5. [Docker Deployment](./docs/05_docker_deployment.md) — Docker Compose and Helm deployment
@@ -377,7 +377,7 @@ Comprehensive guides are available in `docs/`:
 ### Download a Model
 
 ```bash
-uv run huggingface-cli download Qwen/Qwen3-8B
+uv run huggingface-cli download Qwen/Qwen3-30B-A3B
 ```
 
 ### Start a Training Job
