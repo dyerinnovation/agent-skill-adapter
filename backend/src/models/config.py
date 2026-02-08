@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    model: str = "Qwen/Qwen3-8B"
+    model: str = "Qwen/Qwen3-30B-A3B"
     adapter: str = "lora"
     lora_rank: int = 16
     lora_alpha: int = 32

@@ -1,7 +1,7 @@
 # Training Architecture
 
 ## Overview
-Fine-tune a base LLM (default: Qwen3-8B) using LoRA adapters on DGX Spark (NVIDIA GB10, 119GB unified memory).
+Fine-tune a base LLM (default: Qwen3-30B-A3B) using LoRA adapters on DGX Spark (NVIDIA GB10, 119GB unified memory).
 
 ## Components
 

@@ -70,7 +70,7 @@ def test_training_request_valid():
     """Test creating a valid TrainingRequest."""
     request = TrainingRequest(
         skill_id="skill1",
-        model="Qwen/Qwen3-8B",
+        model="Qwen/Qwen3-30B-A3B",
         adapter="lora",
         lora_rank=32,
         lora_alpha=64,
@@ -90,7 +90,7 @@ def test_training_request_defaults():
     """Test TrainingRequest default values."""
     request = TrainingRequest(skill_id="skill1")
     
-    assert request.model == "Qwen/Qwen3-8B"
+    assert request.model == "Qwen/Qwen3-30B-A3B"
     assert request.adapter == "lora"
     assert request.lora_rank == 16
     assert request.lora_alpha == 32

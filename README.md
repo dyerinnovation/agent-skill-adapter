@@ -27,7 +27,7 @@ docker compose up
 Comprehensive guides for setup, deployment, and development:
 
 - [DGX Spark Setup](./docs/01_dgx_spark_setup.md) — SSH access, tool installation, PATH configuration
-- [Model Download](./docs/02_model_download.md) — Download Qwen3-8B from HuggingFace Hub
+- [Model Download](./docs/02_model_download.md) — Download Qwen3-30B-A3B from HuggingFace Hub
 - [Model Serving](./docs/03_model_serving.md) — Deploy TGI with OpenAI-compatible API
 - [Training Guide](./docs/04_training_guide.md) — LoRA/QLoRA fine-tuning workflow
 - [Docker Deployment](./docs/05_docker_deployment.md) — Docker Compose and Helm deployment
@@ -38,7 +38,7 @@ Copy `.env.example` to `.env` and configure. Key settings:
 
 | Variable | Default | Description |
 |---|---|---|
-| `SKILL_ADAPTER_MODEL` | `Qwen/Qwen3-8B` | Base model to fine-tune |
+| `SKILL_ADAPTER_MODEL` | `Qwen/Qwen3-30B-A3B` | Base model to fine-tune |
 | `SKILL_ADAPTER_ADAPTER` | `lora` | Adapter type (lora/qlora) |
 | `SKILL_ADAPTER_QUANT_BITS` | `4` | Quantization bits |
 
