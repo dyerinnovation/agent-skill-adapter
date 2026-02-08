@@ -5,7 +5,7 @@ import httpx
 
 from src.services.inference import InferenceClient
 from src.services.evaluator import evaluate_output
-from src.services.skill_loader import parse_skill_file
+from src.services.skill_loader import parse_skill
 from src.models.schemas import RubricItem
 
 
@@ -89,8 +89,9 @@ class TestInferenceIntegration:
             mock_open.return_value.__exit__ = Mock(return_value=False)
 
             with patch("os.path.exists", return_value=True):
-                from src.services.skill_loader import parse_skill_file
-                skill = parse_skill_file("/fake/path/SKILL.md")
+                from src.services.skill_loader import parse_skill
+                from pathlib import Path
+                skill = parse_skill(Path("/fake/path/SKILL.md"))
 
         # Mock inference client
         mock_httpx_client = AsyncMock()
