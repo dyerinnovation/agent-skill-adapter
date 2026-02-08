@@ -31,7 +31,9 @@ The Agent Skill Adapter is an **RLVF (Reinforcement Learning from Verifiable Fee
 
 ### Infrastructure
 - **Containerization**: Docker, Docker Compose
-- **Orchestration**: Kubernetes (Helm 3.20)
+- **Orchestration**: K3s v1.34.3 (Kubernetes), Helm 3.20
+- **GPU Support**: NVIDIA GPU Operator v25.10.1 (v25.10.0+ required for GB10)
+- **Ingress**: NGINX Ingress Controller (Traefik disabled in K3s)
 - **Deployment Target**: DGX Spark (CUDA 13.0, GB10 GPU, 125GB RAM)
 
 ## Directory Structure
@@ -62,7 +64,8 @@ agent-skill-adapter/
 │   ├── skill-adapter/         # Umbrella chart
 │   ├── backend/               # Backend sub-chart
 │   ├── frontend/              # Frontend sub-chart
-│   └── redis/                 # Redis sub-chart
+│   ├── redis/                 # Redis sub-chart
+│   ├── ingress/               # NGINX Ingress routing sub-chart
 ├── docs/                       # Documentation
 │   ├── 01_dgx_spark_setup.md
 │   ├── 02_model_download.md
@@ -369,6 +372,7 @@ Comprehensive guides are available in `docs/`:
 3. [Model Serving](./docs/03_model_serving.md) — Deploy TGI with Helm, API endpoints
 4. [Training Guide](./docs/04_training_guide.md) — LoRA/QLoRA training, monitoring, checkpoints
 5. [Docker Deployment](./docs/05_docker_deployment.md) — Docker Compose and Helm deployment
+6. [Kubernetes Setup](./docs/06_kubernetes_setup.md) — K3s, GPU Operator, NGINX Ingress on DGX Spark
 
 ## Common Tasks
 

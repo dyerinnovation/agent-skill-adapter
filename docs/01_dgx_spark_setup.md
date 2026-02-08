@@ -108,3 +108,4 @@ cd ~/agent-skill-adapter
 
 - [Model Download Guide](./02_model_download.md) — Download and cache the Qwen3-8B model
 - [Model Serving Guide](./03_model_serving.md) — Deploy TGI for model inference
+- [Kubernetes Setup](./06_kubernetes_setup.md) — Install K3s, GPU Operator, and NGINX Ingress
